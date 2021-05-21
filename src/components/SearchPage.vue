@@ -12,7 +12,6 @@
       </vk-navbar-nav>
     </vk-navbar-full>
     <searchResult v-if="searchDone"/>
-    <router-view/>
   </div>
 </template>
 
