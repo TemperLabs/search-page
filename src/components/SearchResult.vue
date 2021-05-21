@@ -1,29 +1,28 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <p>
-      <vk-button type="primary" size="large">Large button</vk-button>
-    </p>
-    <vk-grid class="uk-child-width-1-2 uk-text-center">
-      <div>
-        <vk-card>Item</vk-card>
-      </div>
-      <div>
-        <vk-grid class="uk-child-width-1-2 uk-text-center">
-          <div>
-            <vk-card padding="large">
-              <vk-card-title>Large</vk-card-title>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </vk-card>
-          </div>
-          <div>
-            <vk-card padding="large">
-              <vk-card-title>Large</vk-card-title>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </vk-card>
-          </div>
-        </vk-grid>
+  <div class="searh-result">
+     <vk-grid class="uk-child-width-1-2@s uk-child-width-1-4@m">
+      <div v-for="(user,index) in getSearchResults" :key="index">
+        <vk-card>{{user}}</vk-card>
       </div>
     </vk-grid>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  name: 'SearchResult',
+  computed: {
+    ...mapGetters([
+      'getSearchResults'
+    ])
+  }
+}
+</script>
+
+<style lang="scss">
+.searh-result {
+  padding: 20px 16px;
+}
+</style>

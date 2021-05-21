@@ -1,24 +1,25 @@
 <template>
   <div class="home">
-    <vk-navbar>
-      <vk-navbar-nav>
+    <vk-navbar-full>
+      <vk-navbar-nav slot="center">
           <vk-navbar-item>
           <vk-navbar-nav-item icon="search"></vk-navbar-nav-item>
-          <form class="uk-search uk-search-navbar" action="javascript:void(0)">
-            <input class="uk-input uk-form-width-small uk-margin-small-right" type="text" placeholder="Input" v-model="inputText">
+          <form class="uk-search" action="javascript:void(0)">
+            <input class="uk-input uk-form-width-large uk-margin-small-right" type="text" placeholder="Input" v-model="inputText">
             <vk-button type="primary" @click="handleSearch(inputText)">Find</vk-button>
           </form>
         </vk-navbar-item>
       </vk-navbar-nav>
-    </vk-navbar>
+    </vk-navbar-full>
     <searchResult v-if="searchDone"/>
+    <router-view/>
   </div>
 </template>
 
 <script>
 import searchResult from './SearchResult'
 export default {
-  name: 'Home',
+  name: 'SearchPage',
   components: {
     searchResult
   },
@@ -51,6 +52,7 @@ export default {
         search.text = text.replace(/[^a-zA-Z0-9 ]/g, '')
       }
       this.$store.dispatch('searchData', search)
+        .then(this.$router.push({ path: `/search/${search.query}/`, query: { query: search.text } }))
       this.searchDone = true
     },
     validEmail: function (email) {
