@@ -34,7 +34,7 @@ export default new Vuex.Store({
       if (state.searchQueryParams === '') {
         return ['Неверно введены данные']
       }
-      return state.data.filter(user => user[state.searchQueryParams].includes(state.searchQueryText))
+      return state.data.filter(user => user[state.searchQueryParams].toLowerCase().includes(state.searchQueryText))
     }
   },
   modules: {
